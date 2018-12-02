@@ -15,7 +15,7 @@ var fondos=[
     {
         data:{framerate: 30,
             "images": ["assets/movil.png"],
-            "frames": {"regX": 200, "regY": 200, "width": 160, "height": 164, "count": 1}
+            "frames": {"regX": stage.canvas.width/100, "regY": stage.canvas.height, "width": 160, "height": 164, "count": 1}
         },
         sprite:{},
     }
