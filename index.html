@@ -1,38 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>90 MINUTES</title>
+	<meta name="description" content="POLICE QUANDARY.Crime Solver. LudumDare43. ">
+	<meta property="og:title" content="90 MINUTES"/>
+	<meta property="og:description" content="POLICE QUANDARY.Crime Solver. LudumDare43.Dic2018.">
+	<meta property="og:type" content="website"/>
+	<!--<meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">-->
 	<meta name="viewport" content="width=1920, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<title>LDJ43</title>	
+	<title>90 MINUTES</title>	
 	<style type="text/css">
 		body, html  {
 			margin: 0;
 			padding: 0;
 			overflow: hidden;
+			background-color: black;
 		}
+    	@font-face {
+		    font-family: 'BrotherDeluxe';
+		    src: url('assets/brotherDeluxe1350____2011.ttf') format('truetype');
+    	}
+    	@font-face {
+		    font-family: 'Commodore64P';
+		    src: url('assets/commodore.ttf') format('truetype');
+    	}
+    	@font-face {
+		    font-family: 'VCR';
+		    src: url('assets/VCR_OSD_MONO_1.001.ttf') format('truetype');
+    	}
+    	@font-face {
+		    font-family: 'Minecraftia-Regular';
+		    src: url('assets/Minecraftia-Regular.ttf') format('truetype');
+    	}
 	</style>
-<!--
-	<script src="js/lib/easeljs-NEXT.min.js"></script>
-	<script src="js/lib/easeljs-0.4.2.min.js"></script>
-	<script src="js/lib/easeljs-NEXT.min.old.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js" integrity="sha256-oTyWrNiP6Qftu4vs2g0RPCKr3g1a6QTlITNgoebxRc4=" crossorigin="anonymous"></script>
--->
+
 
 <script src="js/lib/createjs.min.js"></script>
+<script src="js/es_ES.js"></script>
+<script src="js/main.js"></script>
 <script src="js/movil.js"></script>
 <script src="js/libreta.js"></script>
-<script src="js/mapa.js"></script>
-<script src="js/main.js"></script>
-
-
-<style type="text/css">
-    @font-face {
-    font-family: 'BrotherDeluxe';
-    src: url('assets/brotherDeluxe1350____2011.ttf') format('truetype');
-    }
-</style>
 </head>
-<body onLoad="init();">
-	<canvas id="Canvas" width="1920" height="1080"></canvas>
+
+<body onLoad="loadImages();">
+	<canvas id="mainCanvas" width="1920" height="1080"></canvas>
 </body>
 </html>
