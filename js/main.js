@@ -22,32 +22,32 @@ var hotspotPaths = {
     15: {},
 
     16: {
-        20: { x:560, y:1050, distance: 2 },
-        21: { x:700, y:1100, distance: 2 }
+        20: { x:560*h/1440, y:1050*h/1440, distance: 2 },
+        21: { x:700*h/1440, y:1100*h/1440, distance: 2 }
     },
     20: {
-        1: { x:520, y:644, distance: 6 }, 
-        2: { x:530, y:680, distance: 6 }, 
-        3: { x:525, y:665, distance: 8 }, 
-        7: { x:530, y:765, distance: 5 }, 
-        9: { x:526, y:914, distance: 2 }, 
-        10: { x:528, y:870, distance: 3 }, 
-        11: { x:530, y:765, distance: 7 }, 
-        12: { x:525, y:765, distance: 8 }, 
-        16: { x:560, y:1050, distance: 2 }, 
-        17: { x:556, y:1052, distance: 7 }, 
-        21: { x:550, y:1055, distance: 4 }, 
-        22: { x:560, y:1050, distance: 5 }, 
-        23: { x:565, y:1055, distance: 6 }
+        1: { x:520*h/1440, y:644*h/1440, distance: 6 }, 
+        2: { x:530*h/1440, y:680*h/1440, distance: 6 }, 
+        3: { x:525*h/1440, y:665*h/1440, distance: 8 }, 
+        7: { x:530*h/1440, y:765*h/1440, distance: 5 }, 
+        9: { x:526*h/1440, y:914*h/1440, distance: 2 }, 
+        10: { x:528*h/1440, y:870*h/1440, distance: 3 }, 
+        11: { x:530*h/1440, y:765*h/1440, distance: 7 }, 
+        12: { x:525*h/1440, y:765*h/1440, distance: 8 }, 
+        16: { x:560*h/1440, y:1050*h/1440, distance: 2 }, 
+        17: { x:556*h/1440, y:1052*h/1440, distance: 7 }, 
+        21: { x:550*h/1440, y:1055*h/1440, distance: 4 }, 
+        22: { x:560*h/1440, y:1050*h/1440, distance: 5 }, 
+        23: { x:565*h/1440, y:1055*h/1440, distance: 6 }
     },
     21: {
-        16: { x:700, y:1100, distance: 2 },
-        22: { x:800, y:1180, distance: 2 },
-        23: { x:800, y:1140, distance: 4 },
-        17: { x:800, y:1070, distance: 6 },
-        24: { x:800, y:1175, distance: 6 },
-        25: { x:800, y:1150, distance: 8 },
-        18: { x:802, y:1085, distance: 9 },
+        16: { x:700*h/1440, y:1100*h/1440, distance: 2 },
+        22: { x:800*h/1440, y:1180*h/1440, distance: 2 },
+        23: { x:800*h/1440, y:1140*h/1440, distance: 4 },
+        17: { x:800*h/1440, y:1070*h/1440, distance: 6 },
+        24: { x:800*h/1440, y:1175*h/1440, distance: 6 },
+        25: { x:800*h/1440, y:1150*h/1440, distance: 8 },
+        18: { x:802*h/1440, y:1085*h/1440, distance: 9 },
         //13: { x:800, y:1070, distance: 11 }
     },
     22: {
@@ -109,7 +109,35 @@ var PlayerAtScreenView="Top"; //"Bottom"
 var final=false;
 
 window.addEventListener('resize', resize, false);
-
+    // PARA VERSION DESKTOP
+    window.addEventListener("mousemove", function(e) {
+        if(typeof content!== 'undefined'&typeof stage!== 'undefined'){
+        if (e.screenY > h+15*h/16&PlayerAtScreenView=="Top") { //+14*h/36
+            content.y = -stage.canvas.height;
+            PlayerAtScreenView="Bottom";
+            //this.console.log(stage.canvas.height + ',' + h + '-> pone en: '+PlayerAtScreenView+' :por cursor en pos='+e.screenX+','+e.screenY );
+        }
+        if (e.screenY < 5*w/24&PlayerAtScreenView=="Bottom") {
+            content.y = 0;
+            PlayerAtScreenView="Top";	
+            //this.console.log(stage.canvas.height + ',' + h+'-> pone en: '+PlayerAtScreenView+' :por cursor en pos='+e.screenX+','+ e.screenY);
+        }
+    }
+    else this.console.log("Aún no existe content o stage");
+    });
+    //VERSION MOVIL Y CLICKS
+    window.addEventListener('devicemotion',function(e){
+        if(e.acceleration.z>5){
+            if(content.y === 0&&PlayerAtScreenView==="Top") {
+                content.y = -stage.canvas.height;
+                PlayerAtScreenView="Bottom";
+            }
+            else {
+                content.y=0;
+                PlayerAtScreenView="Top";
+            }
+        }   
+    });
 
 function init() {
 
@@ -119,7 +147,9 @@ function init() {
 	stage.enableMouseOver(60);
 
 	canvas = document.getElementById("mainCanvas");
-	canvas.addEventListener('click', fullscreen);
+    //window.addEventListener('click', fullscreen);
+    stage.canvas.width = window.innerWidth;
+    stage.canvas.height = window.innerHeight;
 
 	ctx = canvas.getContext("2d");
 	ctx.translate(0.5,0.5);
@@ -133,8 +163,8 @@ function init() {
     bkgNotebook = new createjs.Bitmap(loader.getResult('bkgNotebook'));
     mobile = new createjs.Bitmap(loader.getResult('mobile'));
     notebook = new createjs.Bitmap(loader.getResult('notebook'));
-    clickbg = new createjs.Bitmap(loader.getResult('clickbg'));
-    clickbg.scaleX=clickbg.scaleY=h/1440;
+    //clickbg = new createjs.Bitmap(loader.getResult('clickbg'));
+    //clickbg.scaleX=clickbg.scaleY*=h/1440;
     bkgMobile.scaleX=bkgMobile.scaleY=h/1440;
     bkgNotebook.scaleX=bkgNotebook.scaleY=h/1440;
     mobile.scaleX=mobile.scaleY=h/1440;
@@ -148,18 +178,21 @@ function init() {
 
     timeBox = new createjs.Container();
     timeBox.txt = new createjs.Text(time + ' ' + _t.minutes);
-    timeBox.txt.font = '24px Commodore64P';
+    timeBox.txt.font = '18px Commodore64P';
     timeBox.txt.color = '#000';
     timeBox.txt.textAlign = 'right';
-    timeBox.x = stage.canvas.width - 380*h/1440;
+    timeBox.x = 850*h/1440;//stage.canvas.width - 380*h/1440;
     timeBox.y = 530*h/1440;
 
     textBox = new createjs.Container();
     textBox.mouseEnabled = false;
     textBox.mouseChildren = false;
     textBox.bkg = new createjs.Bitmap(loader.getResult('textBox'));
+    textBox.bkg.scaleX*=h/1440;
+    textBox.bkg.scaleY*=h/1440;
 
     textBox.picture = new createjs.Bitmap(loader.getResult('sketch24'));
+    textBox.picture.scaleX=textBox.picture.scaleY*=h/1440;
     textBox.picture.alpha = 0.5;
     textBox.picture.x = 60*h/1440;
     textBox.picture.y = 390*h/1440;
@@ -168,15 +201,16 @@ function init() {
     textBox.y = 523*h/1440;
     textBox.visible = false;
     textBox.titleTxt = new createjs.Text('');
-    textBox.titleTxt.font = '24px Verdana';
+    textBox.titleTxt.font = '18px Verdana';
     textBox.titleTxt.color = '#FFF';
     textBox.titleTxt.x = 35*h/1440;
     textBox.titleTxt.y = 25*h/1440;
     //textBox.titleTxt.maxWidth = stage.canvas.width;
-    textBox.titleTxt.lineWidth = 600;
+    textBox.titleTxt.lineWidth = 600*h/1440;
 
     alert1 = new createjs.Container();
     alert1.bkg = new createjs.Bitmap(loader.getResult('alert1'));
+    alert1.bkg.scaleX=alert1.bkg.scaleY*=h/1440;
     alert1.x = 319*h/1440;
     alert1.y = 523*h/1440;
     alert1.visible = false;
@@ -190,10 +224,11 @@ function init() {
 
     alert1.btnOK = new createjs.Container();
     alert1.btnOK.bkg = new createjs.Bitmap(loader.getResult('alertBtn'));
-    alert1.btnOK.x = 430*w/1920;
+    alert1.btnOK.bkg.scaleX=alert1.btnOK.bkg.scaleY*=h/1440;
+    alert1.btnOK.x = 430*h/1440;
     alert1.btnOK.y = 440*h/1440;
     alert1.btnOK.txt = new createjs.Text('OK');
-    alert1.btnOK.txt.font = '24px Commodore64P';
+    alert1.btnOK.txt.font = '12px Commodore64P';
     alert1.btnOK.txt.color = '#000';
     alert1.btnOK.txt.textAlign = 'center';
     alert1.btnOK.txt.x = 86*h/1440;
@@ -202,10 +237,11 @@ function init() {
 
     alert1.btnKO = new createjs.Container();
     alert1.btnKO.bkg = new createjs.Bitmap(loader.getResult('alertBtn'));
+    alert1.btnKO.bkg.scaleX=alert1.btnKO.bkg.scaleY*=h/1440;
     alert1.btnKO.x = 670*h/1440;
     alert1.btnKO.y = 440*h/1440;
     alert1.btnKO.txt = new createjs.Text('Cancel');
-    alert1.btnKO.txt.font = '24px Commodore64P';
+    alert1.btnKO.txt.font = '12px Commodore64P';
     alert1.btnKO.txt.color = '#000';
     alert1.btnKO.txt.textAlign = 'center';
     alert1.btnKO.txt.x = 86*h/1440;
@@ -224,6 +260,7 @@ function init() {
 
     alert2 = new createjs.Container();
     alert2.bkg = new createjs.Bitmap(loader.getResult('alert2'));
+    alert2.bkg.scaleX=alert2.bkg.scaleY*=h/1440;
     alert2.car = new createjs.Bitmap(loader.getResult('car'));
     alert2.car.x = alert2.car.oldX = 270*h/1440;
     alert2.car.y = 610*h/1440;
@@ -234,20 +271,21 @@ function init() {
 
     dialog = new createjs.Container();
     dialog.bkg = new createjs.Bitmap(loader.getResult('dialog'));
+    dialog.bkg.scaleX=dialog.bkg.scaleY*=1.2*h/1440;
     dialog.regX = (1230*h/1440) / 2;
     dialog.x = window.innerWidth / 2;
 
     dialog.y = stage.canvas.height - 740*h/1440;
-    dialog.bkg.alpha = 0.7
+    dialog.bkg.alpha = 0.7;
     dialog.txt = new createjs.Text('');
-    dialog.txt.font = '20px Commodore64P';
+    dialog.txt.font = '12px Commodore64P';
     dialog.txt.color = '#FFF';
     dialog.txt.x = 40*h/1440;
     dialog.txt.y = 40*h/1440;
     dialog.txt.lineWidth = 1100*w/1920;
 
     dialog.txtOK = new createjs.Text('');
-    dialog.txtOK.font = '26px Commodore64P';
+    dialog.txtOK.font = '12px Commodore64P';
     dialog.txtOK.color = '#FFF';
     dialog.txtOK.x = 40*h/1440;
     dialog.txtOK.y = 240*h/1440;
@@ -261,6 +299,11 @@ function init() {
     dialog.txtOK.addEventListener('click', function(e) {  
         if(typeof quiz!=='undefined'&&typeof quiz[quiz.i]!=='undefined'){
         dialog.txtOK.text = "-" + quiz[quiz.i].answer[0].value + _t.minutes;
+        }
+        else {
+            console.log("No existe quiz o quiz(i)");
+            dialog.txtOK.text = "- No definido";
+        }
 
         dialog.txtOK.visible = false;
         setTimeout(function(){ dialog.txtOK.visible = true; }, 500);
@@ -269,7 +312,7 @@ function init() {
         setTimeout(function(){ dialog.txtOK.visible = false; }, 2000);
         setTimeout(function(){ dialog.txtOK.visible = true; }, 2500);
         setTimeout(function() {
-            quiz.i++; 
+        quiz.i++; 
             if (quiz[quiz.i]) {
                 nextQuiz(quiz);
             } else {
@@ -277,15 +320,14 @@ function init() {
             }
         }, 3000);
         updateTime(time - quiz[quiz.i].answer[0].value);
-        }
-        else console.log("No existe quiz o quiz(i)");
+        
         addClue(dialog.txt.text,contacts.length+1); //ANOTA EN LIBRETA id?
 
         
     });
 
     dialog.txtKO = new createjs.Text('');
-    dialog.txtKO.font = '26px Commodore64P';
+    dialog.txtKO.font = '12px Commodore64P';
     dialog.txtKO.color = '#FFF';
     dialog.txtKO.cursor = 'pointer';
     dialog.txtKO.x = 40*h/1440;
@@ -311,7 +353,7 @@ function init() {
     });
 
     dialog.txtNext = new createjs.Text('Le llamaré al móvil...');
-    dialog.txtNext.font = '26px Commodore64P';
+    dialog.txtNext.font = '12px Commodore64P';
     dialog.txtNext.color = '#FFF';
     dialog.txtNext.cursor = 'pointer';
     dialog.txtNext.x = 40*h/1440;
@@ -366,8 +408,8 @@ function init() {
         }
     });
 
-    bkgNotebook.x = 9*w/16;//1080;
-    bkgNotebook.y = h+149*h/360;//2036;//JNO 2*stage.canvas.height;
+    bkgNotebook.x = (bkg.image.width-bkgNotebook.image.width)*h/1440;//(24.5)*w/64;//1080;
+    bkgNotebook.y = h+148*h/360;//2036;//JNO 2*stage.canvas.height;
     bkgNotebook.cursor = 'pointer';
     bkgNotebook.addEventListener('mouseover', function(e) {
         e.currentTarget.image = loader.getResult('bkgNotebookOn');
@@ -432,7 +474,7 @@ botonMusica.scaleY=0.25;
 content.addChild(botonMusica); 
 botonMusica.addEventListener('click',stopSounds);
 
-    content.addChild(clickbg);
+   // content.addChild(clickbg);
     resize();
 	
 	
@@ -451,7 +493,7 @@ botonMusica.addEventListener('click',stopSounds);
 function handleTick() {
 
     
-    if(time<90&time>60) playSound("tema1");
+    if(time<90&time>0) playSound("tema1");
     if(time<60&time>30) playSound("tema2");
     if(time<30&time>0){
         playSound("tema2");
@@ -556,9 +598,9 @@ function loadImages() {
         {src: 'text-box.png', id: 'textBox'},
         {src: 'text-box.png', id: 'textBox'},
     ];
-    for(var i in hotspots) {
-        hotspots[i].x*=h/1440;
-        hotspots[i].y*=h/1440;
+    for(var k in hotspots) {
+        hotspots[k].x*=h/1440;
+        hotspots[k].y*=h/1440;
     }
 
     for (var i=20;i<=20;i++) {
@@ -587,50 +629,11 @@ function fullscreen() {
         el.msRequestFullscreen;
 
     rfs.call(el);
-    content.removeChild(clickbg);
-    canvas.removeEventListener('click', fullscreen);
+    //content.removeChild(clickbg);
+    //window.removeEventListener('click', fullscreen);
 
-    // PARA VERSION DESKTOP
-    canvas.addEventListener("mousemove", function(e) {
-    if(typeof content!== 'undefined'&typeof stage!== 'undefined'){
-	if (e.screenY > h+13*h/36&PlayerAtScreenView=="Top") {
-		content.y = -stage.canvas.height;
-        PlayerAtScreenView="Bottom";
-        //this.console.log(stage.canvas.height + ',' + h + '-> pone en: '+PlayerAtScreenView+' :por cursor en pos='+e.screenX+','+e.screenY );
-	}
-	if (e.screenY < 5*w/24&PlayerAtScreenView=="Bottom") {
-		content.y = 0;
-        PlayerAtScreenView="Top";	
-        //this.console.log(stage.canvas.height + ',' + h+'-> pone en: '+PlayerAtScreenView+' :por cursor en pos='+e.screenX+','+ e.screenY);
-    }
-}
-else this.console.log("Aún no existe content o stage");
-});
-//VERSION MOVIL Y CLICKS
-window.addEventListener('devicemotion',function(e){
-    if(e.acceleration.z>1){
-        if(content.y == 0) content.y = -stage.canvas.height;
-        else content.y=0;
-        if(PlayerAtScreenView=="Top") PlayerAtScreenView="Bottom";
-        else PlayerAtScreenView="Top";
-    }   
-});
- /*canvas.addEventListener('click', function(e) {
-   if(typeof content!== 'undefined'&typeof stage!== 'undefined'){
-	if ((e.clientY > h+13*h/36) &PlayerAtScreenView=="Top") { //980 stage.canvas.height-100
-		content.y = -stage.canvas.height;
-        PlayerAtScreenView="Bottom";
-        //this.console.log(stage.canvas.height + ',' + h+'-> pone en: '+PlayerAtScreenView+' :por click en pos='+e.clientX+','+e.clientY);
-	}
-	if (e.clientY < 5*w/24&PlayerAtScreenView=="Bottom") {//200
-		content.y = 0;
-        PlayerAtScreenView="Top";
-        //this.console.log(stage.canvas.height + ',' + h+'-> pone en: '+PlayerAtScreenView+' :por click en pos='+e.clientX+','+e.clientY);
-	}
-		
-  }
-  else this.console.log("Aun no existe content o stage");
-});*/
+
+ 
     stage.canvas.width = window.innerWidth;
     stage.canvas.height = window.innerHeight;
     fullscreenActivated = true;
@@ -686,9 +689,11 @@ function moveCar(timeLeft) {
             lastPath.img.visible = false;
         }
         lastPin.image = loader.getResult('selectedPin');
+        lastPin.image.scaleX=lastPin.image.scaleY*=h/1440;
         lastPin.blocked = true;
         lastPin.mouseEnabled = false;
         previousLastPin.image = loader.getResult('idlePin');
+        previousLastPin.image.scaleX=previousLastPin.image.scaleY*=h/1440;
         previousLastPin.blocked = false;
         previousLastPin.mouseEnabled = true;
         previousLastPin = lastPin;
@@ -715,10 +720,10 @@ function nextQuiz(q) {
 
     quiz = q;
     dialog.txt.text = q[q.i].text;
-    if (q[q.i].answer && q[q.i].answer[0].text) {
+    if (q[q.i].answer && q[q.i].answer[0].text){
         dialog.txtOK.text = q[q.i].answer[0].text;
     }
-    if (q[q.i].answer && q[q.i].answer[1].text) {
+    if (q[q.i].answer && q[q.i].answer[1].text){
         dialog.txtKO.text = q[q.i].answer[1].text;
     }
 
@@ -767,6 +772,7 @@ function loadHotspots() {
     for (var i=0; i<hotspots.length;i++) {
         var hp = hotspots[i];
         hp.bmp = new createjs.Bitmap(loader.getResult('idlePin'));
+        hp.bmp.scaleX=hp.bmp.scaleY*=h/1440;
         if (i == initCarPosition-1) {
             lastPin = previousLastPin = hp.bmp;
             hp.bmp.image = loader.getResult('selectedPin');
@@ -786,8 +792,9 @@ function loadHotspots() {
             + '\n\n' + _t.hotspots[hp.bmp.id].text; 
 
         hp.bmp.addEventListener('mouseover', function(e) {
+            var hpTarget;
             if (hotspotPaths[lastPin.id]){
-                if(typeof hotspotPaths[lastPin.id][e.currentTarget.id]!=='undefined') var hpTarget = hotspotPaths[lastPin.id][e.currentTarget.id];
+                if(typeof hotspotPaths[lastPin.id][e.currentTarget.id]!=='undefined') hpTarget = hotspotPaths[lastPin.id][e.currentTarget.id];
                 else console.log('hotspotPaths[][x] '+hotspotPaths[lastPin.id]+' sin datos');
             }
             if (hpTarget && hpTarget.distance) {
@@ -801,8 +808,11 @@ function loadHotspots() {
             }
 
             var image = loader.getResult('sketch'+e.currentTarget.id);
-            if(image) textBox.picture.image = image;
-
+            
+            if(image){ 
+                image.scaleX=image.scaleY*=h/1440;
+                textBox.picture.image = image;
+            }
             textBox.visible = true;
             if (!hpTarget || !hpTarget.distance || hpTarget.distance > 8) {
                 e.currentTarget.image = loader.getResult('overKOPin');

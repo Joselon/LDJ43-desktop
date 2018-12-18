@@ -186,11 +186,11 @@ function loadMobile(){
   // }
   // if(typeof message_mobile!== 'undefined'){ 
     message_mobile = new createjs.Text("Agent 2: Info");
-    message_mobile.font ="24px BrotherDeluxe";
+    message_mobile.font ="18px BrotherDeluxe";
     message_mobile.color = 'white';//ROJO "#99402D";
 	message_mobile.x =80*h/1440; //50 window.innerWidth/3; 
     message_mobile.y = 500*h/1440; //36px fuente 
-    message_mobile.lineWidth= 550*w/1920;//550;//window.innerWidth;
+    message_mobile.lineWidth= 350*w/1920;//550;//window.innerWidth;
     mobileC.addChild(message_mobile);
 
     loadContact(iActualContact);

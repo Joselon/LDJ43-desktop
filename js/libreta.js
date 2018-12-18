@@ -5,6 +5,7 @@ var closeButton2;
 var notebookActive=false;
 var iClue=0;
 var clues=[];
+clueYanterior=0;
 function loadNotebook(){
  console.log("Opening notebook..."); 
  //if(stage){
@@ -24,7 +25,7 @@ function loadNotebook(){
     
 
     message_notebook = new createjs.Text("Pistas/Info");
-    message_notebook.font ="24px BrotherDeluxe";
+    message_notebook.font ="16px BrotherDeluxe";
     message_notebook.color = "#99402D";
 	message_notebook.x = window.innerWidth/4; 
     message_notebook.y = window.innerHeight/8;
@@ -59,11 +60,15 @@ function addClue(textClue,idWitness){
         textClue='Patrulla'+idWitness+': '+textClue; //.slice(0,60)+'...'
     }
     clues[iClue] = new createjs.Text(textClue);
-    clues[iClue].font ="24px BrotherDeluxe";
+    clues[iClue].font ="16px BrotherDeluxe";
     clues[iClue].textAlign="left";
     clues[iClue].color = colorPista;
-    clues[iClue].x = window.innerWidth/4; 
-    clues[iClue].y = 2*window.innerHeight/8+iClue*window.innerHeight/8*h/1440;
-    clues[iClue].lineWidth=window.innerWidth;
+    clues[iClue].x = w/10; 
+    clues[iClue].y = 2*h/10+clueYanterior; //Guardar ultima posicion en clueYanterior;
+    if(textClue.length>window.innerWidth/32){
+        clueYanterior=((16*textClue.length/window.innerWidth)*h/10)+iClue*h/10;
+    }
+    else clueYanterior=2*iClue*h/10;
+    clues[iClue].lineWidth=window.innerWidth/2;
     iClue++;
 }
