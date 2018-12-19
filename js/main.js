@@ -110,7 +110,7 @@ var final=false;
 
 window.addEventListener('resize', resize, false);
     // PARA VERSION DESKTOP
-    window.addEventListener("mousemove", function(e) {
+    /*window.addEventListener("mousemove", function(e) {
         if(typeof content!== 'undefined'&typeof stage!== 'undefined'){
         if (e.screenY > h+15*h/16&PlayerAtScreenView=="Top") { //+14*h/36
             content.y = -stage.canvas.height;
@@ -124,10 +124,10 @@ window.addEventListener('resize', resize, false);
         }
     }
     else this.console.log("Aún no existe content o stage");
-    });
+    });*/
     //VERSION MOVIL Y CLICKS
     window.addEventListener('devicemotion',function(e){
-        if(e.acceleration.z>5){
+        if(e.acceleration.x>5){
             if(content.y === 0&&PlayerAtScreenView==="Top") {
                 content.y = -stage.canvas.height;
                 PlayerAtScreenView="Bottom";
@@ -181,7 +181,7 @@ function init() {
     timeBox.txt.font = '18px Commodore64P';
     timeBox.txt.color = '#000';
     timeBox.txt.textAlign = 'right';
-    timeBox.x = 850*h/1440;//stage.canvas.width - 380*h/1440;
+    timeBox.x = 1450*h/1440;//stage.canvas.width - 380*h/1440;
     timeBox.y = 530*h/1440;
 
     textBox = new createjs.Container();
@@ -201,7 +201,7 @@ function init() {
     textBox.y = 523*h/1440;
     textBox.visible = false;
     textBox.titleTxt = new createjs.Text('');
-    textBox.titleTxt.font = '18px Verdana';
+    textBox.titleTxt.font = '12px Verdana';
     textBox.titleTxt.color = '#FFF';
     textBox.titleTxt.x = 35*h/1440;
     textBox.titleTxt.y = 25*h/1440;
@@ -215,10 +215,10 @@ function init() {
     alert1.y = 523*h/1440;
     alert1.visible = false;
     alert1.txt = new createjs.Text('');
-    alert1.txt.font = '12px Commodore64P';
+    alert1.txt.font = '8px Commodore64P';
     alert1.txt.color = '#000';
     alert1.txt.x = 360*h/1440;
-    alert1.txt.y = 280*h/1440;
+    alert1.txt.y = 260*h/1440;
     alert1.txt.lineWidth = 500*h/1440;
 
 
@@ -226,9 +226,9 @@ function init() {
     alert1.btnOK.bkg = new createjs.Bitmap(loader.getResult('alertBtn'));
     alert1.btnOK.bkg.scaleX=alert1.btnOK.bkg.scaleY*=h/1440;
     alert1.btnOK.x = 430*h/1440;
-    alert1.btnOK.y = 440*h/1440;
+    alert1.btnOK.y = 450*h/1440;
     alert1.btnOK.txt = new createjs.Text('OK');
-    alert1.btnOK.txt.font = '12px Commodore64P';
+    alert1.btnOK.txt.font = '8px Commodore64P';
     alert1.btnOK.txt.color = '#000';
     alert1.btnOK.txt.textAlign = 'center';
     alert1.btnOK.txt.x = 86*h/1440;
@@ -239,9 +239,9 @@ function init() {
     alert1.btnKO.bkg = new createjs.Bitmap(loader.getResult('alertBtn'));
     alert1.btnKO.bkg.scaleX=alert1.btnKO.bkg.scaleY*=h/1440;
     alert1.btnKO.x = 670*h/1440;
-    alert1.btnKO.y = 440*h/1440;
+    alert1.btnKO.y = 450*h/1440;
     alert1.btnKO.txt = new createjs.Text('Cancel');
-    alert1.btnKO.txt.font = '12px Commodore64P';
+    alert1.btnKO.txt.font = '8px Commodore64P';
     alert1.btnKO.txt.color = '#000';
     alert1.btnKO.txt.textAlign = 'center';
     alert1.btnKO.txt.x = 86*h/1440;
@@ -278,17 +278,17 @@ function init() {
     dialog.y = stage.canvas.height - 740*h/1440;
     dialog.bkg.alpha = 0.7;
     dialog.txt = new createjs.Text('');
-    dialog.txt.font = '12px Commodore64P';
+    dialog.txt.font = '10px Commodore64P';
     dialog.txt.color = '#FFF';
     dialog.txt.x = 40*h/1440;
     dialog.txt.y = 40*h/1440;
     dialog.txt.lineWidth = 1100*w/1920;
 
     dialog.txtOK = new createjs.Text('');
-    dialog.txtOK.font = '12px Commodore64P';
+    dialog.txtOK.font = '8px Commodore64P';
     dialog.txtOK.color = '#FFF';
     dialog.txtOK.x = 40*h/1440;
-    dialog.txtOK.y = 240*h/1440;
+    dialog.txtOK.y = 250*h/1440;
 
     dialog.txtOK.addEventListener('mouseover', function(e) {
         e.currentTarget.color = '#FFFF00';
@@ -327,11 +327,11 @@ function init() {
     });
 
     dialog.txtKO = new createjs.Text('');
-    dialog.txtKO.font = '12px Commodore64P';
+    dialog.txtKO.font = '8px Commodore64P';
     dialog.txtKO.color = '#FFF';
     dialog.txtKO.cursor = 'pointer';
     dialog.txtKO.x = 40*h/1440;
-    dialog.txtKO.y = 280*h/1440;
+    dialog.txtKO.y = 290*h/1440;
     dialog.txtKO.addEventListener('mouseover', function(e) {
         e.currentTarget.color = '#FFFF00';
     });

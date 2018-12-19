@@ -18,6 +18,7 @@ function loadNotebook(){
     content.addChild(notebookC);
     //notebookC.addChild(notebook);
     closeButton2=new createjs.Bitmap(loader.getResult('closeBt'));
+closeButton2.alpha=0.1;
     closeButton2.x=w/24;//80;
     closeButton2.y=0;
     notebookC.addChild(closeButton2);

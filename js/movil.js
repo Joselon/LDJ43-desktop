@@ -63,7 +63,7 @@ var contacts=[{
 },
 {
     idImage:"contact8",
-    infoArray:["Pista1:Whoper Junior sin queso","Pista2:Las patatas normales o deluxe?","Pista3:Caminante no hay camino"],
+    infoArray:["Pista1:Whoper Junior sin queso","Pista2:Las ¿patatas normales o deluxe?","Pista3:Caminante no hay camino"],
     indexInfo:0,
     siteMaplocation:"casa8",
     suspect:true,
@@ -103,7 +103,7 @@ var contacts=[{
 },
 {
     idImage:"contact13",
-    infoArray:["Pista1:Tra, tra","Pista2:¿Habeis escuchado a Rosalia, yo no","Pista3:En el pais de los tuertos..."],
+    infoArray:["Pista1:Tra, tra","Pista2:¿Habeis escuchado a Rosalia?, yo no","Pista3:En el pais de los tuertos..."],
     indexInfo:0,
     siteMaplocation:"casa8",
     suspect:true,
@@ -135,7 +135,7 @@ var contacts=[{
 },
 {
     idImage:"contact17",
-    infoArray:["Pista1:Pues hasta aqui hemos llegado","¿Pista2:A quien vas a llamar?","Pista3:Ghostbuster!"],
+    infoArray:["Pista1:Pues hasta aqui hemos llegado","Pista2:¿A quien vas a llamar?","Pista3:Ghostbuster!"],
     indexInfo:0,
     siteMaplocation:"casa8",
     suspect:true,
@@ -160,7 +160,8 @@ function loadMobile(){
     //content.addChild(mobile); //adopta al del main 
 
     closeButton=new createjs.Bitmap(loader.getResult('closeBt'));
-    mobileC.addChild(closeButton);
+    closeButton.alpha=0.1;
+mobileC.addChild(closeButton);
     closeButton.x= 0;//window.innerWidth
     closeButton.y= 0;//window.innerHeight
     closeButton.addEventListener("click",closeMobile);
@@ -170,23 +171,23 @@ function loadMobile(){
     audioButton = new createjs.Bitmap(loader.getResult('callBt'));
     audioButton.x= 400*h/1440;//window.innerWidthAjustado por escala 3 del fondo
     audioButton.y= 200*h/1440;//window.innerHeight/3;
-    audioButton.scaleX = 0.25*h/1440;
-    audioButton.scaleY=0.25*h/1440;
+    audioButton.scaleX = 0.45*h/1440;
+    audioButton.scaleY=0.45*h/1440;
     mobileC.addChild(audioButton);
     audioButton.addEventListener("click",saveClue);
 
     audioButton2 = new createjs.Bitmap(loader.getResult('deleteBt'));
     audioButton2.x = 400*h/1440;// window.innerWidth;//  Ajustado por escala 3 del fondo
     audioButton2.y= 400*h/1440;//window.innerHeight/2;
-    audioButton2.scaleX = 0.25*h/1440;
-    audioButton2.scaleY=0.25*h/1440;
+    audioButton2.scaleX = 0.45*h/1440;
+    audioButton2.scaleY=0.45*h/1440;
     mobileC.addChild(audioButton2);
     audioButton2.addEventListener("click",discardClue);
   
   // }
   // if(typeof message_mobile!== 'undefined'){ 
     message_mobile = new createjs.Text("Agent 2: Info");
-    message_mobile.font ="18px BrotherDeluxe";
+    message_mobile.font ="16px BrotherDeluxe";
     message_mobile.color = 'white';//ROJO "#99402D";
 	message_mobile.x =80*h/1440; //50 window.innerWidth/3; 
     message_mobile.y = 500*h/1440; //36px fuente 
@@ -198,16 +199,16 @@ function loadMobile(){
     prevButton = new createjs.Bitmap(loader.getResult('prev'));
     prevButton.x = 100*h/1440;// window.innerWidth/3;//  Ajustado por escala 3 del fondo
     prevButton.y= 200*h/1440;//window.innerHeight/2;
-    prevButton.scaleX = 0.25*h/1440;
-    prevButton.scaleY=0.25*h/1440;
+    prevButton.scaleX = 0.35*h/1440;
+    prevButton.scaleY=0.35*h/1440;
     mobileC.addChild(prevButton);
     prevButton.addEventListener("click",prevContact);
 
     nextButton = new createjs.Bitmap(loader.getResult('prev'));
     nextButton.x = 100*h/1440;// window.innerWidth/3;//  Ajustado por escala 3 del fondo
     nextButton.y= 400*h/1440;//3*window.innerHeight/4;
-    nextButton.scaleX = 0.25*h/1440;
-    nextButton.scaleY=-0.25*h/1440;
+    nextButton.scaleX = 0.35*h/1440;
+    nextButton.scaleY=-0.35*h/1440;
     mobileC.addChild(nextButton);
     nextButton.addEventListener("click",nextContact);
   
@@ -232,8 +233,8 @@ function loadContact(n){
     console.log("Cargando imagen de contacto: "+contacts[n].idImage);
     contactView.x = 200*h/1440;// window.innerWidth/2nnerHeight/2;
     contactView.y = 200*h/1440;
-    contactView.scaleX = 3*h/1440;
-    contactView.scaleY=3*h/1440;
+    contactView.scaleX = 3.5*h/1440;
+    contactView.scaleY=3.5*h/1440;
     mobileC.addChild(contactView);
     contactView.addEventListener('click',cambiaFondo)
     message_mobile.text=contacts[n].infoArray[contacts[n].indexInfo];
