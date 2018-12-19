@@ -127,7 +127,7 @@ window.addEventListener('resize', resize, false);
     });*/
     //VERSION MOVIL Y CLICKS
     window.addEventListener('devicemotion',function(e){
-        if(e.acceleration.x>5){
+        if(e.acceleration.x>3){
             if(content.y === 0&&PlayerAtScreenView==="Top") {
                 content.y = -stage.canvas.height;
                 PlayerAtScreenView="Bottom";
@@ -273,7 +273,7 @@ function init() {
     dialog.bkg = new createjs.Bitmap(loader.getResult('dialog'));
     dialog.bkg.scaleX=dialog.bkg.scaleY*=1.2*h/1440;
     dialog.regX = (1230*h/1440) / 2;
-    dialog.x = window.innerWidth / 2;
+    dialog.x = window.innerWidth/ 4;
 
     dialog.y = stage.canvas.height - 740*h/1440;
     dialog.bkg.alpha = 0.7;
@@ -282,7 +282,7 @@ function init() {
     dialog.txt.color = '#FFF';
     dialog.txt.x = 40*h/1440;
     dialog.txt.y = 40*h/1440;
-    dialog.txt.lineWidth = 1100*w/1920;
+    dialog.txt.lineWidth = (3*w/4)*w/1920;//1100*w/1920;
 
     dialog.txtOK = new createjs.Text('');
     dialog.txtOK.font = '8px Commodore64P';
@@ -367,6 +367,7 @@ function init() {
     dialog.txtNext.addEventListener('click', function(e) {
         dialog.txtNext.visible = false;
         dialog.visible = false;
+        //Meter funcion next para cambiar dialog por mobile
     });
 
     dialog.cursor = 'pointer';
@@ -682,8 +683,8 @@ function moveCar(timeLeft) {
     } else {
         alert2.visible = false;
 
-        miniCar.x = lastPin.x+10;
-        miniCar.y = lastPin.y+54;
+        miniCar.x = lastPin.x+10*h/1440;
+        miniCar.y = lastPin.y+54*h/1400;
 
         if (lastPath.img) {
             lastPath.img.visible = false;
@@ -755,6 +756,7 @@ function loadHotspotPaths() {
     for (var i in hotspotPaths) {
         for(var j in hotspotPaths[i]) {
             hotspotPaths[i][j].img = new createjs.Bitmap(loader.getResult(i + '-' + j));
+            hotspotPaths[i][j].img.scaleX=hotspotPaths[i][j].img.scaleY *=h/1440;
             hotspotPaths[i][j].img.x = hotspotPaths[i][j].x;
             hotspotPaths[i][j].img.y = hotspotPaths[i][j].y;
             hotspotPaths[i][j].img.visible = false;
@@ -778,8 +780,8 @@ function loadHotspots() {
             hp.bmp.image = loader.getResult('selectedPin');
             hp.bmp.blocked = true;
             hp.bmp.mouseEnabled = false;  
-            miniCar.x = hp.x+10;
-            miniCar.y = hp.y+54;
+            miniCar.x = (hp.x)+10*h/1440;
+            miniCar.y = (hp.y)+54*h/1440;
             //moveCar(0);
         }
         hp.bmp.id = i+1;
